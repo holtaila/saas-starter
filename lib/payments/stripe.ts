@@ -1,17 +1,20 @@
 import Stripe from 'stripe';
 import { redirect } from 'next/navigation';
-import { Team } from '@/lib/db/schema';
-import {
-  getTeamByStripeCustomerId,
-  getUser,
-  updateTeamSubscription
-} from '@/lib/db/queries';
+
+// TODO: Update to use Supabase organization schema
+// import { Team } from '@/lib/db/schema';
+// import {
+//   getTeamByStripeCustomerId,
+//   getUser,
+//   updateTeamSubscription
+// } from '@/lib/db/queries';
 
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-04-30.basil'
 });
 
-export async function createCheckoutSession({
+// TODO: Update to use Supabase organizations and users
+/*export async function createCheckoutSession({
   team,
   priceId
 }: {
@@ -44,9 +47,9 @@ export async function createCheckoutSession({
   });
 
   redirect(session.url!);
-}
+}*/
 
-export async function createCustomerPortalSession(team: Team) {
+/*export async function createCustomerPortalSession(team: Team) {
   if (!team.stripeCustomerId || !team.stripeProductId) {
     redirect('/pricing');
   }
@@ -112,9 +115,9 @@ export async function createCustomerPortalSession(team: Team) {
     return_url: `${process.env.BASE_URL}/dashboard`,
     configuration: configuration.id
   });
-}
+}*/
 
-export async function handleSubscriptionChange(
+/*export async function handleSubscriptionChange(
   subscription: Stripe.Subscription
 ) {
   const customerId = subscription.customer as string;
@@ -144,7 +147,7 @@ export async function handleSubscriptionChange(
       subscriptionStatus: status
     });
   }
-}
+}*/
 
 export async function getStripePrices() {
   const prices = await stripe.prices.list({

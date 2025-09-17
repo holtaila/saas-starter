@@ -111,6 +111,9 @@ CREATE TABLE IF NOT EXISTS public.calls (
   retell_call_id text,
   retell_agent_id text,
   phone_number text NOT NULL,
+  from_number text,
+  to_number text,
+  disconnect_reason text,
   crm_id text,
   status call_status NOT NULL DEFAULT 'scheduled',
   direction call_direction NOT NULL,
@@ -146,6 +149,16 @@ ALTER TABLE public.calls
 -- Add created_at column if it doesn't exist (for existing databases)
 ALTER TABLE public.calls
   ADD COLUMN IF NOT EXISTS created_at timestamptz NOT NULL DEFAULT now();
+
+-- Add missing call detail columns (for existing databases)
+ALTER TABLE public.calls
+  ADD COLUMN IF NOT EXISTS from_number text;
+
+ALTER TABLE public.calls
+  ADD COLUMN IF NOT EXISTS to_number text;
+
+ALTER TABLE public.calls
+  ADD COLUMN IF NOT EXISTS disconnect_reason text;
 
 -- helpful indexes
 CREATE INDEX IF NOT EXISTS idx_agents_org ON public.agents(organization_id);

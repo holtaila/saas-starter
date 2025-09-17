@@ -149,3 +149,285 @@ Required variables (see `.env.example`):
 - Turbopack for fast development builds
 - Global SWR configuration pre-populates user/team data
 - Activity logging system tracks user events via `ActivityType` enum
+
+
+## Crucial DB tables in supabase
+
+create table public.call_campaigns (
+  id uuid not null default gen_random_uuid (),
+  organization_id uuid null default get_my_org_id (),
+  agent_id uuid null,
+  name text not null,
+  csv_file_url text null,
+  total_numbers integer null default 0,
+  processed_numbers integer null default 0,
+  status public.campaign_status not null default 'pending'::campaign_status,
+  trigger_job_id text null,
+  created_at timestamp with time zone not null default now(),
+  updated_at timestamp with time zone null default now(),
+  original_csv_url text null,
+  csv_content jsonb null,
+  csv_validation_errors jsonb null,
+  can_retry boolean not null default true,
+  last_retry_at timestamp without time zone null,
+  retry_count integer not null default 0,
+  created_by uuid null default auth.uid (),
+  constraint call_campaigns_pkey primary key (id),
+  constraint call_campaigns_agent_id_fkey foreign KEY (agent_id) references agents (id) on delete set null,
+  constraint call_campaigns_created_by_fkey foreign KEY (created_by) references auth.users (id) on delete set null,
+  constraint call_campaigns_organization_id_fkey foreign KEY (organization_id) references organizations (id) on delete set null
+) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_org on public.call_campaigns using btree (organization_id) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_agent on public.call_campaigns using btree (agent_id) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_status on public.call_campaigns using btree (status) TABLESPACE pg_default;
+create trigger update_call_campaigns_updated_at BEFORE
+update on call_campaigns for EACH row
+execute FUNCTION update_updated_at_column ();
+
+create table public.call_campaigns (
+  id uuid not null default gen_random_uuid (),
+  organization_id uuid null default get_my_org_id (),
+  agent_id uuid null,
+  name text not null,
+  csv_file_url text null,
+  total_numbers integer null default 0,
+  processed_numbers integer null default 0,
+  status public.campaign_status not null default 'pending'::campaign_status,
+  trigger_job_id text null,
+  created_at timestamp with time zone not null default now(),
+  updated_at timestamp with time zone null default now(),
+  original_csv_url text null,
+  csv_content jsonb null,
+  csv_validation_errors jsonb null,
+  can_retry boolean not null default true,
+  last_retry_at timestamp without time zone null,
+  retry_count integer not null default 0,
+  created_by uuid null default auth.uid (),
+  constraint call_campaigns_pkey primary key (id),
+  constraint call_campaigns_agent_id_fkey foreign KEY (agent_id) references agents (id) on delete set null,
+  constraint call_campaigns_created_by_fkey foreign KEY (created_by) references auth.users (id) on delete set null,
+  constraint call_campaigns_organization_id_fkey foreign KEY (organization_id) references organizations (id) on delete set null
+) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_org on public.call_campaigns using btree (organization_id) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_agent on public.call_campaigns using btree (agent_id) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_status on public.call_campaigns using btree (status) TABLESPACE pg_default;
+create trigger update_call_campaigns_updated_at BEFORE
+update on call_campaigns for EACH row
+execute FUNCTION update_updated_at_column ();
+
+create table public.call_campaigns (
+  id uuid not null default gen_random_uuid (),
+  organization_id uuid null default get_my_org_id (),
+  agent_id uuid null,
+  name text not null,
+  csv_file_url text null,
+  total_numbers integer null default 0,
+  processed_numbers integer null default 0,
+  status public.campaign_status not null default 'pending'::campaign_status,
+  trigger_job_id text null,
+  created_at timestamp with time zone not null default now(),
+  updated_at timestamp with time zone null default now(),
+  original_csv_url text null,
+  csv_content jsonb null,
+  csv_validation_errors jsonb null,
+  can_retry boolean not null default true,
+  last_retry_at timestamp without time zone null,
+  retry_count integer not null default 0,
+  created_by uuid null default auth.uid (),
+  constraint call_campaigns_pkey primary key (id),
+  constraint call_campaigns_agent_id_fkey foreign KEY (agent_id) references agents (id) on delete set null,
+  constraint call_campaigns_created_by_fkey foreign KEY (created_by) references auth.users (id) on delete set null,
+  constraint call_campaigns_organization_id_fkey foreign KEY (organization_id) references organizations (id) on delete set null
+) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_org on public.call_campaigns using btree (organization_id) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_agent on public.call_campaigns using btree (agent_id) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_status on public.call_campaigns using btree (status) TABLESPACE pg_default;
+create trigger update_call_campaigns_updated_at BEFORE
+update on call_campaigns for EACH row
+execute FUNCTION update_updated_at_column ();
+
+create table public.call_campaigns (
+  id uuid not null default gen_random_uuid (),
+  organization_id uuid null default get_my_org_id (),
+  agent_id uuid null,
+  name text not null,
+  csv_file_url text null,
+  total_numbers integer null default 0,
+  processed_numbers integer null default 0,
+  status public.campaign_status not null default 'pending'::campaign_status,
+  trigger_job_id text null,
+  created_at timestamp with time zone not null default now(),
+  updated_at timestamp with time zone null default now(),
+  original_csv_url text null,
+  csv_content jsonb null,
+  csv_validation_errors jsonb null,
+  can_retry boolean not null default true,
+  last_retry_at timestamp without time zone null,
+  retry_count integer not null default 0,
+  created_by uuid null default auth.uid (),
+  constraint call_campaigns_pkey primary key (id),
+  constraint call_campaigns_agent_id_fkey foreign KEY (agent_id) references agents (id) on delete set null,
+  constraint call_campaigns_created_by_fkey foreign KEY (created_by) references auth.users (id) on delete set null,
+  constraint call_campaigns_organization_id_fkey foreign KEY (organization_id) references organizations (id) on delete set null
+) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_org on public.call_campaigns using btree (organization_id) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_agent on public.call_campaigns using btree (agent_id) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_status on public.call_campaigns using btree (status) TABLESPACE pg_default;
+create trigger update_call_campaigns_updated_at BEFORE
+update on call_campaigns for EACH row
+execute FUNCTION update_updated_at_column ();
+
+create table public.call_campaigns (
+  id uuid not null default gen_random_uuid (),
+  organization_id uuid null default get_my_org_id (),
+  agent_id uuid null,
+  name text not null,
+  csv_file_url text null,
+  total_numbers integer null default 0,
+  processed_numbers integer null default 0,
+  status public.campaign_status not null default 'pending'::campaign_status,
+  trigger_job_id text null,
+  created_at timestamp with time zone not null default now(),
+  updated_at timestamp with time zone null default now(),
+  original_csv_url text null,
+  csv_content jsonb null,
+  csv_validation_errors jsonb null,
+  can_retry boolean not null default true,
+  last_retry_at timestamp without time zone null,
+  retry_count integer not null default 0,
+  created_by uuid null default auth.uid (),
+  constraint call_campaigns_pkey primary key (id),
+  constraint call_campaigns_agent_id_fkey foreign KEY (agent_id) references agents (id) on delete set null,
+  constraint call_campaigns_created_by_fkey foreign KEY (created_by) references auth.users (id) on delete set null,
+  constraint call_campaigns_organization_id_fkey foreign KEY (organization_id) references organizations (id) on delete set null
+) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_org on public.call_campaigns using btree (organization_id) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_agent on public.call_campaigns using btree (agent_id) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_status on public.call_campaigns using btree (status) TABLESPACE pg_default;
+create trigger update_call_campaigns_updated_at BEFORE
+update on call_campaigns for EACH row
+execute FUNCTION update_updated_at_column ();
+
+create table public.call_campaigns (
+  id uuid not null default gen_random_uuid (),
+  organization_id uuid null default get_my_org_id (),
+  agent_id uuid null,
+  name text not null,
+  csv_file_url text null,
+  total_numbers integer null default 0,
+  processed_numbers integer null default 0,
+  status public.campaign_status not null default 'pending'::campaign_status,
+  trigger_job_id text null,
+  created_at timestamp with time zone not null default now(),
+  updated_at timestamp with time zone null default now(),
+  original_csv_url text null,
+  csv_content jsonb null,
+  csv_validation_errors jsonb null,
+  can_retry boolean not null default true,
+  last_retry_at timestamp without time zone null,
+  retry_count integer not null default 0,
+  created_by uuid null default auth.uid (),
+  constraint call_campaigns_pkey primary key (id),
+  constraint call_campaigns_agent_id_fkey foreign KEY (agent_id) references agents (id) on delete set null,
+  constraint call_campaigns_created_by_fkey foreign KEY (created_by) references auth.users (id) on delete set null,
+  constraint call_campaigns_organization_id_fkey foreign KEY (organization_id) references organizations (id) on delete set null
+) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_org on public.call_campaigns using btree (organization_id) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_agent on public.call_campaigns using btree (agent_id) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_status on public.call_campaigns using btree (status) TABLESPACE pg_default;
+create trigger update_call_campaigns_updated_at BEFORE
+update on call_campaigns for EACH row
+execute FUNCTION update_updated_at_column ();
+
+create table public.call_campaigns (
+  id uuid not null default gen_random_uuid (),
+  organization_id uuid null default get_my_org_id (),
+  agent_id uuid null,
+  name text not null,
+  csv_file_url text null,
+  total_numbers integer null default 0,
+  processed_numbers integer null default 0,
+  status public.campaign_status not null default 'pending'::campaign_status,
+  trigger_job_id text null,
+  created_at timestamp with time zone not null default now(),
+  updated_at timestamp with time zone null default now(),
+  original_csv_url text null,
+  csv_content jsonb null,
+  csv_validation_errors jsonb null,
+  can_retry boolean not null default true,
+  last_retry_at timestamp without time zone null,
+  retry_count integer not null default 0,
+  created_by uuid null default auth.uid (),
+  constraint call_campaigns_pkey primary key (id),
+  constraint call_campaigns_agent_id_fkey foreign KEY (agent_id) references agents (id) on delete set null,
+  constraint call_campaigns_created_by_fkey foreign KEY (created_by) references auth.users (id) on delete set null,
+  constraint call_campaigns_organization_id_fkey foreign KEY (organization_id) references organizations (id) on delete set null
+) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_org on public.call_campaigns using btree (organization_id) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_agent on public.call_campaigns using btree (agent_id) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_status on public.call_campaigns using btree (status) TABLESPACE pg_default;
+create trigger update_call_campaigns_updated_at BEFORE
+update on call_campaigns for EACH row
+execute FUNCTION update_updated_at_column ();
+
+create table public.call_campaigns (
+  id uuid not null default gen_random_uuid (),
+  organization_id uuid null default get_my_org_id (),
+  agent_id uuid null,
+  name text not null,
+  csv_file_url text null,
+  total_numbers integer null default 0,
+  processed_numbers integer null default 0,
+  status public.campaign_status not null default 'pending'::campaign_status,
+  trigger_job_id text null,
+  created_at timestamp with time zone not null default now(),
+  updated_at timestamp with time zone null default now(),
+  original_csv_url text null,
+  csv_content jsonb null,
+  csv_validation_errors jsonb null,
+  can_retry boolean not null default true,
+  last_retry_at timestamp without time zone null,
+  retry_count integer not null default 0,
+  created_by uuid null default auth.uid (),
+  constraint call_campaigns_pkey primary key (id),
+  constraint call_campaigns_agent_id_fkey foreign KEY (agent_id) references agents (id) on delete set null,
+  constraint call_campaigns_created_by_fkey foreign KEY (created_by) references auth.users (id) on delete set null,
+  constraint call_campaigns_organization_id_fkey foreign KEY (organization_id) references organizations (id) on delete set null
+) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_org on public.call_campaigns using btree (organization_id) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_agent on public.call_campaigns using btree (agent_id) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_status on public.call_campaigns using btree (status) TABLESPACE pg_default;
+create trigger update_call_campaigns_updated_at BEFORE
+update on call_campaigns for EACH row
+execute FUNCTION update_updated_at_column ();
+
+create table public.call_campaigns (
+  id uuid not null default gen_random_uuid (),
+  organization_id uuid null default get_my_org_id (),
+  agent_id uuid null,
+  name text not null,
+  csv_file_url text null,
+  total_numbers integer null default 0,
+  processed_numbers integer null default 0,
+  status public.campaign_status not null default 'pending'::campaign_status,
+  trigger_job_id text null,
+  created_at timestamp with time zone not null default now(),
+  updated_at timestamp with time zone null default now(),
+  original_csv_url text null,
+  csv_content jsonb null,
+  csv_validation_errors jsonb null,
+  can_retry boolean not null default true,
+  last_retry_at timestamp without time zone null,
+  retry_count integer not null default 0,
+  created_by uuid null default auth.uid (),
+  constraint call_campaigns_pkey primary key (id),
+  constraint call_campaigns_agent_id_fkey foreign KEY (agent_id) references agents (id) on delete set null,
+  constraint call_campaigns_created_by_fkey foreign KEY (created_by) references auth.users (id) on delete set null,
+  constraint call_campaigns_organization_id_fkey foreign KEY (organization_id) references organizations (id) on delete set null
+) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_org on public.call_campaigns using btree (organization_id) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_agent on public.call_campaigns using btree (agent_id) TABLESPACE pg_default;
+create index IF not exists idx_call_campaigns_status on public.call_campaigns using btree (status) TABLESPACE pg_default;
+create trigger update_call_campaigns_updated_at BEFORE
+update on call_campaigns for EACH row
+execute FUNCTION update_updated_at_column ();

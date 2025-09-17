@@ -117,3 +117,47 @@ While this template is intentionally minimal and to be used as a learning resour
 - https://makerkit.dev
 - https://zerotoshipped.com
 - https://turbostarter.dev
+
+
+
+
+# Supabase
+supabase_db_pw=
+SUPABASE_CONNECTION_STRING="postgresql:
+
+# Supabase
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_SUPABASE_URL=https://ykbgrdizfdsnpwcbynww.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbG
+# new
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_
+SUPABASE_SECRET_KEY=sb_
+
+
+
+# Retell
+RETELL_API_KEY=key_
+RETELL_WEBHOOK_SECRET=key_e
+
+
+
+# Trigger
+TRIGGER_SECRET_KEY=tr_
+```
+
+# Zoho
+client_ID=1000.
+
+
+
+TRIGGER_PROJECT_REF=proj_qbrufhzawiegrpvndnhq
+CRON_SECRET=CR1234
+TRIGGER_API_KEY=tr_
+
+OPENAI_API_KEY=
+anthropic_api_key=sk-
+
+
+RESEND_API_KEY=re_
+EMAIL_FROM_ADDRESS=
+EMAIL_FROM_NAME=
